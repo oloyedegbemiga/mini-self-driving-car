@@ -64,6 +64,7 @@ void setup_encoders(){
     pinMode(ENCODER_L, INPUT);
     pinMode(DIRECTION_L, INPUT);
 
+    // setup interrupts for encoders
     attachInterrupt(digitalPinToInterrupt(ENCODER_R), READ_R_ENCODER, CHANGE);
     attachInterrupt(digitalPinToInterrupt(ENCODER_L), READ_L_ENCODER, CHANGE);
 }
@@ -95,4 +96,12 @@ void rightWheelDrive(int pwm){
     ledcWrite(CH_B1, 255);
     ledcWrite(CH_B2, 255 + pwm);
   }
+}
+
+void READ_R_ENCODER(){
+    // TODO
+}
+
+void READ_L_ENCODER(){
+    // TODO
 }
