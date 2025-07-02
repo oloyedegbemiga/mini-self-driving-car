@@ -29,6 +29,8 @@ void setup() {
   // pinMode(AIN2, OUTPUT);
 
   Serial.begin(115200);
+  setup_motors();
+  setup_encoders();
 
   // // PWM setup 0
   // ledcSetup(CH_A1, freq, resolution);
@@ -62,11 +64,14 @@ void loop() {
   // digitalWrite(BIN1, HIGH);
   // digitalWrite(BIN2, LOW);
   Serial.println("Ongoing-drive");
-  delay(3000);
+  // delay(3000);
+  // leftWheelDrive(120);
+  // delay(5000);
+  // rightWheelDrive(180);
+  // delay(2000);
   leftWheelDrive(120);
+  rightWheelDrive(120);
   delay(5000);
-  rightWheelDrive(180);
-  delay(2000);
 
   // stop
   leftWheelDrive(0);

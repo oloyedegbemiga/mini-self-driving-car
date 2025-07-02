@@ -1,14 +1,23 @@
 #include <Arduino.h>
 
+// define pins for driving motors
 #define BIN1 13
 #define BIN2 12
 #define AIN1 27
 #define AIN2 26
 
+// define pwm channels
 #define CH_A1 0
 #define CH_B1 1
 #define CH_A2 2
 #define CH_B2 3
+
+// define encoder pins
+
+#define ENCODER_L 17
+#define DIRECTION_L 16
+#define ENCODER_R 19
+#define DIRECTION_R 18
 
 // general variables
 const int freq = 1000;
@@ -19,6 +28,9 @@ void leftWheelDrive(int pwm);
 void rightWheelDrive(int pwm);
 void setup_motors();
 void setup_encoders();
+
+void READ_R_ENCODER();
+void READ_L_ENCODER();
 
 void setup_motors(){
   // PWM setup 0
@@ -47,6 +59,13 @@ void setup_motors(){
 
 void setup_encoders(){
     // pass
+    pinMode(ENCODER_R, INPUT);
+    pinMode(DIRECTION_R, INPUT);
+    pinMode(ENCODER_L, INPUT);
+    pinMode(DIRECTION_L, INPUT);
+
+    attachInterrupt(digitalPinToInterrupt(ENCODER_R), READ_R_ENCODER, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(ENCODER_L), READ_L_ENCODER, CHANGE);
 }
 
 // put function definitions here:
