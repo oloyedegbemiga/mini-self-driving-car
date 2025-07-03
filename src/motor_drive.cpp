@@ -23,6 +23,10 @@
 const int freq = 1000;
 const int resolution = 8;
 
+
+// encoder reading values
+volatile long EncoderData_L, EncoderData_R;
+
 // put function declarations here:
 void leftWheelDrive(int pwm);
 void rightWheelDrive(int pwm);
@@ -100,8 +104,34 @@ void rightWheelDrive(int pwm){
 
 void READ_R_ENCODER(){
     // TODO
+    if (digitalRead(ENCODER_R) == LOW){
+        if (digitalRead(DIRECTION_R) == LOW){
+            EncoderData_R++;
+        } else{
+            EncoderData_R--;
+        }
+    }else{
+        if (digitalRead(DIRECTION_R) == LOW){
+            EncoderData_R--;
+        } else {
+            EncoderData_R++;
+        }
+    }
 }
 
 void READ_L_ENCODER(){
     // TODO
+    if (digitalRead(ENCODER_L) == LOW){
+        if (digitalRead(DIRECTION_L) == LOW){
+            EncoderData_L++;
+        } else{
+            EncoderData_L--;
+        }
+    }else{
+        if (digitalRead(DIRECTION_L) == LOW){
+            EncoderData_L--;
+        } else {
+            EncoderData_L++;
+        }
+    }
 }
