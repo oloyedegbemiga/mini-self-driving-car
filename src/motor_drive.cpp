@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "motor_drive.h"
 
 // define pins for driving motors
 #define BIN1 13
@@ -23,9 +24,8 @@
 const int freq = 1000;
 const int resolution = 8;
 
+volatile long encoderData_L, encoderData_R;
 
-// encoder reading values
-volatile long EncoderData_L, EncoderData_R;
 
 // put function declarations here:
 void leftWheelDrive(int pwm);
@@ -76,13 +76,13 @@ void setup_encoders(){
 // put function definitions here:
 void leftWheelDrive(int pwm){
   // pass
-  Serial.println("Left drive");
+//   Serial.println("Left drive");
   if (pwm > 0){
-    Serial.println("Left drive + ");
+    // Serial.println("Left drive + ");
     ledcWrite(CH_A1, 255);
     ledcWrite(CH_A2, 255 - pwm);
   }else{
-    Serial.println("Left drive - ");
+    // Serial.println("Left drive - ");
     ledcWrite(CH_A1, 255);
     ledcWrite(CH_A2, 255 + pwm);
   }
@@ -90,13 +90,13 @@ void leftWheelDrive(int pwm){
 
 void rightWheelDrive(int pwm){
   // pass
-  Serial.println("Right drive");
+//   Serial.println("Right drive");
   if (pwm > 0){
-    Serial.println("Right drive + ");
+    // Serial.println("Right drive + ");
     ledcWrite(CH_B1, 255);
     ledcWrite(CH_B2, 255 - pwm);
   }else{
-    Serial.println("Right drive - ");
+    // Serial.println("Right drive - ");
     ledcWrite(CH_B1, 255);
     ledcWrite(CH_B2, 255 + pwm);
   }
@@ -106,15 +106,15 @@ void READ_R_ENCODER(){
     // TODO
     if (digitalRead(ENCODER_R) == LOW){
         if (digitalRead(DIRECTION_R) == LOW){
-            EncoderData_R++;
+            encoderData_R++;
         } else{
-            EncoderData_R--;
+            encoderData_R--;
         }
     }else{
         if (digitalRead(DIRECTION_R) == LOW){
-            EncoderData_R--;
+            encoderData_R--;
         } else {
-            EncoderData_R++;
+            encoderData_R++;
         }
     }
 }
@@ -123,15 +123,15 @@ void READ_L_ENCODER(){
     // TODO
     if (digitalRead(ENCODER_L) == LOW){
         if (digitalRead(DIRECTION_L) == LOW){
-            EncoderData_L++;
+            encoderData_L++;
         } else{
-            EncoderData_L--;
+            encoderData_L--;
         }
     }else{
         if (digitalRead(DIRECTION_L) == LOW){
-            EncoderData_L--;
+            encoderData_L--;
         } else {
-            EncoderData_L++;
+            encoderData_L++;
         }
     }
 }
